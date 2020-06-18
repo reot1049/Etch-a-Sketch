@@ -1,3 +1,4 @@
+let size = 0;
 var board = document.querySelector(".container");
 let color = 0;
 function initBoard(row, col) {
@@ -32,9 +33,21 @@ function hover() {
     })
 }
 
-let size = prompt("choose a number between 5 and 64");
-hover();
-initBoard(size, size);
+function start() {
+    size = prompt("choose a number between 5 and 64");
+    if(size < 5 || size > 64)
+    {
+        alert("You didn't choose a number between 5 and 64, try again!");
+        start();
+    }
+    else 
+    {
+        initBoard(size, size);
+        hover();
+    }
+}
+
+start();
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -66,5 +79,18 @@ origColor.onclick = function() {
 }
 
 resize.onclick = function() {
-    
+    size = prompt("choose a number between 5 and 64");
+    if(size < 5 || size > 64)
+    {
+        alert("You didn't choose a number between 5 and 64, try again!");
+    }
+    else 
+    {
+        var list = document.querySelectorAll(".gridSquares");
+        for(let i = 0; i < list.length; i++)
+        {
+            list[i].remove();
+        }
+        initBoard(size, size);
+    }
 }
